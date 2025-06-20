@@ -215,7 +215,6 @@ void handle_redirs(t_redirections *redir, t_mini *mini)
 void minishell(t_mini *mini)
 {
     t_cmd *cmd;
-    int status;
 
     cmd = mini->start_cmd;
     while (mini->exit == 0 && cmd)
@@ -228,9 +227,6 @@ void minishell(t_mini *mini)
         reset_std(mini);
         close_fds(mini);
         reset_fds(mini);
-
-        waitpid(-1, &status, 0);
-        status = WEXITSTATUS(status);
 
         if (mini->parent == 0)
         {
